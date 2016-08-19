@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <properties resource="jdbc.properties"/>
+    <settings>
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC">
+            </transactionManager>
+            <dataSource type="com.kitchen.persist.utils.C3P0DataSourceFactory">
+                <property name="driverClass" value="${jdbc.driverClass}"/>
+                <property name="jdbcUrl" value="${jdbc.connectionURL}"/>
+                <property name="user" value="${jdbc.userId}"/>
+                <property name="password" value="${jdbc.password}"/>
+                <!--连接池中保留的最大连接数。默认值15 -->
+                <property name="maxPoolSize" value="2"/>
+                <!-- 连接池中保留的最小连接数，默认为3-->
+                <property name="minPoolSize" value="1"/>
+                <!-- 初始化连接池中的连接数，默认为3-->
+                <property name="initialPoolSize" value="1"/>
+                <!--最大空闲时间，默认值: 0 -->
+                <property name="maxIdleTime" value="0"/>
+                <!-- 每60秒检查所有连接池中的空闲连接 -->
+                <property name="idleConnectionTestPeriod" value="60"/>
+                <!-- 连接测试语句 -->
+                <property name="preferredTestQuery" value="SELECT 1"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <mappers>
+        <mapper resource="sqlmap/KtRegionMapper.xml"/>
+    </mappers>
+</configuration>
